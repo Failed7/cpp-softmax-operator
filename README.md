@@ -48,7 +48,7 @@ cpp-softmax-operator/
 ├── tests/
 │   └── test_softmax.py
 └── benchmarks/
-    └── benchmark.py
+    └── benchmark.cpp
 ```
 
 项目目录会随着开发进度逐步建立。
