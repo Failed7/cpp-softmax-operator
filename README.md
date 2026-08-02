@@ -24,17 +24,15 @@
 
 Softmax 的基本公式为：
 
-\[
+$$
 y_i = \frac{e^{x_i}}{\sum_j e^{x_j}}
-\]
+$$
 
 直接计算指数时可能出现数值溢出，因此实际实现将使用以下形式：
 
-\[
-y_i =
-\frac{e^{x_i-\max(x)}}
-{\sum_j e^{x_j-\max(x)}}
-\]
+$$
+y_i = \frac{e^{x_i-\max(x)}}{\sum_j e^{x_j-\max(x)}}
+$$
 
 ## 计划中的项目结构
 
