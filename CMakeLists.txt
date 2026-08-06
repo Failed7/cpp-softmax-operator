@@ -22,10 +22,22 @@ target_include_directories(test_driver PRIVATE include)
 enable_testing()
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
-add_test(NAME softmax_1d
-    COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tests/test_softmax.py
+add_test(
+    NAME softmax_1d
+    COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_SOURCE_DIR}/tests/test_softmax_1d.py
 )
 
-set_tests_properties(softmax_1d PROPERTIES
+add_test(
+    NAME softmax_2d
+    COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_SOURCE_DIR}/tests/test_softmax_2d.py
+)
+
+set_tests_properties(
+    softmax_1d
+    softmax_2d
+    PROPERTIES
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    RUN_SERIAL TRUE
 )
