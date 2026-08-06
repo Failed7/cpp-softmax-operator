@@ -39,3 +39,5 @@ run_1d_case(input_random_1d, "random")
 input_stability_1d = np.array([80000.0, 80001.0, 80002.0], dtype = np.float32)
 run_1d_case(input_stability_1d, "numerical stability")
 
+run_1d_case(np.array([5.0], dtype=np.float32), "single element")
+run_1d_case(np.full(5, 3.0, dtype=np.float32), "all equal")

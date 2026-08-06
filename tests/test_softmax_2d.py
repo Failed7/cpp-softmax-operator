@@ -39,3 +39,7 @@ input_random_2d = rng.uniform(low = -10.0, high = 10.0, size=(3, 4)).astype(np.f
 run_2d_case(input_random_2d, "row-wise")
 
 run_2d_case(input_random_2d.T, "column-wise through transpose")
+
+run_2d_case(np.array([[5.0]], dtype=np.float32), "1x1 matrix")
+run_2d_case(np.full((3, 4), 3.0, dtype=np.float32), "all equal matrix")
+run_2d_case(rng.uniform(-10, 10, size=(5, 1)).astype(np.float32), "single column")

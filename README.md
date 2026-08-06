@@ -20,6 +20,15 @@
 - 尝试一种简单的 CPU 性能优化
 - 使用 CMake 管理项目构建
 
+## 当前状态
+
+- 稳定的 1D Softmax 实现
+- 按行（Row-wise）的 2D Softmax 实现
+- 基于 Python/SciPy 的正确性验证
+- 包含随机性、数值稳定性和边界情况的测试
+- 独立的 1D 和 2D CTest 测试项
+- 当前结果：2/2 项测试通过
+
 ## Softmax 计算
 
 Softmax 的基本公式为：
@@ -57,10 +66,10 @@ cpp-softmax-operator/
 
 - [x] 创建 GitHub 仓库
 - [x] 确定第一阶段项目范围
-- [ ] 建立基础 C++ 与 CMake 工程
-- [ ] 实现普通 Softmax
-- [ ] 实现数值稳定版 Softmax
-- [ ] 编写正确性测试
+- [x] 建立基础 C++ 与 CMake 工程
+- [x] 实现普通 Softmax
+- [x] 实现数值稳定版 Softmax
+- [x] 编写正确性测试
 - [ ] 编写性能测试
 - [ ] 尝试基础 CPU 优化
 - [ ] 整理测试结果与项目文档
