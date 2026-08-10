@@ -1,0 +1,31 @@
+2D seed = 1786342210582885100
+
+Input size = 10 * 100
+Median time = 0.0028 ms
+Throughput = 357.143 M elements/s
+Time per element = 2.8 ns
+Sum of the last output = 10 (expected about 10)
+
+Input size = 100 * 100
+Median time = 0.0471 ms
+Throughput = 212.314 M elements/s
+Time per element = 4.71 ns
+Sum of the last output = 100 (expected about 100)
+
+Input size = 100 * 1000
+Median time = 0.26375 ms
+Throughput = 379.147 M elements/s
+Time per element = 2.6375 ns
+Sum of the last output = 100 (expected about 100)
+
+Input size = 1000 * 1000
+Median time = 3.5128 ms
+Throughput = 284.673 M elements/s
+Time per element = 3.5128 ns
+Sum of the last output = 1000 (expected about 1000)
+
+Input size = 1000 * 5000
+Median time = 18.0549 ms
+Throughput = 276.933 M elements/s
+Time per element = 3.61098 ns
+Sum of the last output = 1000 (expected about 1000)
