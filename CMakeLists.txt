@@ -19,6 +19,13 @@ add_executable(test_driver
 
 target_include_directories(test_driver PRIVATE include)
 
+add_executable(test_optimization
+    tests/test_optimization.cpp
+    src/softmax.cpp
+)
+
+target_include_directories(test_optimization PRIVATE include)
+
 add_executable(softmax_benchmark
     benchmarks/benchmark_softmax.cpp
     src/softmax.cpp
@@ -39,9 +46,14 @@ add_test(NAME softmax_2d
             ${CMAKE_SOURCE_DIR}/tests/test_softmax_2d.py
 )
 
+add_test(NAME softmax_optimization
+    COMMAND test_optimization
+)
+
 set_tests_properties(
     softmax_1d
     softmax_2d
+    softmax_optimization
     PROPERTIES
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     RUN_SERIAL TRUE

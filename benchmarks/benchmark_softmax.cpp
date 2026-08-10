@@ -9,17 +9,10 @@
 
 using namespace std;
 
-int run_1d_benchmark(size_t size, mt19937& rng){
-    cout << "Input size = " << size << endl;
+int run_1d_benchmark(const vector<float>& input){
+    cout << "[1D Baseline]" << endl;
 
-    vector<float> input(size);
-
-    uniform_real_distribution<float> dist(-10.0f, 10.0f);
-    for (size_t i = 0; i < input.size(); ++i) {
-        input[i] = dist(rng);
-    }
-
-    vector<float> output(size);
+    vector<float> output(input.size());
     for (int i = 0; i < 5; ++i){
         output = MySoftmax_1D(input);
     }
@@ -39,29 +32,22 @@ int run_1d_benchmark(size_t size, mt19937& rng){
     double median_ms = (times[9] + times[10]) / 2.0;
     cout << "Median time = " << median_ms << " ms" << endl;
 
-    double elements_per_second = size / (median_ms / 1000.0);
+    double elements_per_second = output.size() / (median_ms / 1000.0);
     cout << "Throughput = " << elements_per_second / 1e6 << " M elements/s" << endl;
     
-    double ns_per_element = median_ms * 1e6 / size;
+    double ns_per_element = median_ms * 1e6 / output.size();
     cout << "Time per element = " << ns_per_element << " ns" << endl;
     
-    float sum = accumulate(output.begin(), output.end(), 0.0);
+    double sum = accumulate(output.begin(), output.end(), 0.0);
     cout << "Sum of the last output = " << sum << endl << endl;
 
     return 0;
 }
 
-int run_2d_benchmark(size_t row, size_t col, mt19937& rng){
-    cout << "Input size = " << row << " * " << col << endl;
+int run_2d_benchmark(size_t row, size_t col, const vector<float>& input){
+    cout << "[2D Baseline]" << endl;
 
     size_t size = row * col;
-    vector<float> input(size);
-
-    uniform_real_distribution<float> dist(-10.0f, 10.0f);
-    for (size_t i = 0; i < input.size(); ++i) {
-        input[i] = dist(rng);
-    }
-
     vector<float> output(size);
     for (int i = 0; i < 5; ++i){
         output = MySoftmax_2D(input, row, col);
@@ -88,7 +74,78 @@ int run_2d_benchmark(size_t row, size_t col, mt19937& rng){
     double ns_per_element = median_ms * 1e6 / size;
     cout << "Time per element = " << ns_per_element << " ns" << endl;
     
-    float sum = accumulate(output.begin(), output.end(), 0.0);
+    double sum = accumulate(output.begin(), output.end(), 0.0);
+    cout << "Sum of the last output = " << sum << " (expected about " << row << ")" << endl << endl;
+
+    return 0;
+}
+
+int run_1d_opt1_benchmark(const vector<float>& input){
+    cout << "[1D Opt1 - Output Buffer Reuse]" << endl;
+
+    vector<float> output(input.size());
+    for (int i = 0; i < 5; ++i){
+        MySoftmax_1D_Opt1(input, output);
+    }
+
+    vector<double> times;
+    for (int i = 0; i < 20; ++i){
+        auto start = chrono::steady_clock::now();
+        MySoftmax_1D_Opt1(input, output);
+        auto end = chrono::steady_clock::now();
+
+        double elapsed_ms = chrono::duration<double, milli>(end - start).count();
+        times.push_back(elapsed_ms);
+    }
+
+    sort(times.begin(), times.end());
+
+    double median_ms = (times[9] + times[10]) / 2.0;
+    cout << "Median time = " << median_ms << " ms" << endl;
+
+    double elements_per_second = output.size() / (median_ms / 1000.0);
+    cout << "Throughput = " << elements_per_second / 1e6 << " M elements/s" << endl;
+    
+    double ns_per_element = median_ms * 1e6 / output.size();
+    cout << "Time per element = " << ns_per_element << " ns" << endl;
+    
+    double sum = accumulate(output.begin(), output.end(), 0.0);
+    cout << "Sum of the last output = " << sum << endl << endl;
+
+    return 0;
+}
+
+int run_2d_opt1_benchmark(size_t row, size_t col, const vector<float>& input){
+    cout << "[2D Opt1 - Output Buffer Reuse]" << endl;
+    
+    size_t size = row * col;
+    vector<float> output(size);
+    for (int i = 0; i < 5; ++i){
+        MySoftmax_2D_Opt1(input, row, col, output);
+    }
+
+    vector<double> times;
+    for (int i = 0; i < 20; ++i){
+        auto start = chrono::steady_clock::now();
+        MySoftmax_2D_Opt1(input, row, col, output);
+        auto end = chrono::steady_clock::now();
+
+        double elapsed_ms = chrono::duration<double, milli>(end - start).count();
+        times.push_back(elapsed_ms);
+    }
+
+    sort(times.begin(), times.end());
+
+    double median_ms = (times[9] + times[10]) / 2.0;
+    cout << "Median time = " << median_ms << " ms" << endl;
+
+    double elements_per_second = size / (median_ms / 1000.0);
+    cout << "Throughput = " << elements_per_second / 1e6 << " M elements/s" << endl;
+    
+    double ns_per_element = median_ms * 1e6 / size;
+    cout << "Time per element = " << ns_per_element << " ns" << endl;
+    
+    double sum = accumulate(output.begin(), output.end(), 0.0);
     cout << "Sum of the last output = " << sum << " (expected about " << row << ")" << endl << endl;
 
     return 0;
@@ -99,14 +156,25 @@ int main(){
     
     mt19937 rng(seed);
 
-    cout << "1D seed = " << seed << endl << endl;
+    cout << "Seed = " << seed << endl << endl;
     vector<size_t> sizes = {1000, 10000, 100000, 1000000, 5000000};
 
+    uniform_real_distribution<float> dist(-10.0f, 10.0f);
+
     for(size_t i = 0; i < sizes.size(); ++i){
-        run_1d_benchmark(sizes[i], rng);
+        cout << "========================================" << endl;
+        cout << "Input size = " << sizes[i] << endl;
+        cout << "========================================" << endl << endl;
+
+        vector<float> input_1d(sizes[i]);
+        for (size_t i = 0; i < input_1d.size(); ++i) {
+            input_1d[i] = dist(rng);
+        }
+
+        run_1d_benchmark(input_1d);
+        run_1d_opt1_benchmark(input_1d);
     }
 
-    cout << "2D seed = " << seed << endl << endl;
     vector<pair<size_t, size_t>> shapes = {
         {10, 100},
         {100, 100},
@@ -119,7 +187,19 @@ int main(){
         size_t row = shapes[i].first;
         size_t col = shapes[i].second;
 
-        run_2d_benchmark(row, col, rng);
+        cout << "========================================" << endl;
+        cout << "Input size = " << row << " * " << col << endl;
+        cout << "========================================" << endl << endl;
+
+        vector<float> input_2d(row * col);
+
+        uniform_real_distribution<float> dist(-10.0f, 10.0f);
+        for (size_t i = 0; i < input_2d.size(); ++i) {
+            input_2d[i] = dist(rng);
+        }
+
+        run_2d_benchmark(row, col, input_2d);
+        run_2d_opt1_benchmark(row, col, input_2d);
     }
 
     return 0;

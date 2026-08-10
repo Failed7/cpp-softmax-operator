@@ -5,7 +5,7 @@
 
 using namespace std; 
 
-vector<float>  MySoftmax_1D(const vector<float>& nums){
+vector<float> MySoftmax_1D(const vector<float>& nums){
     if(nums.empty()){
         return {};
     }
@@ -27,7 +27,7 @@ vector<float>  MySoftmax_1D(const vector<float>& nums){
     
 }
 
-vector<float>  MySoftmax_2D(const vector<float>& nums, int row, int col){
+vector<float> MySoftmax_2D(const vector<float>& nums, int row, int col){
     if(nums.empty() || col <= 0 || row <= 0 || col * row != nums.size()){
         return {};
     }
@@ -52,4 +52,53 @@ vector<float>  MySoftmax_2D(const vector<float>& nums, int row, int col){
 
     return e;
 
+}
+
+void MySoftmax_1D_Opt1(const vector<float>& nums, vector<float>& output){
+    if(nums.empty()){
+        output.clear();
+        return;
+    }
+
+    if(output.size() != nums.size()){
+        output.resize(nums.size());
+    }
+    float sum = 0.0;
+    float max = *max_element(nums.begin(), nums.end());
+
+    for(int i = 0; i < nums.size(); ++i){
+        output[i] = exp(nums[i] - max);
+        sum = sum + output[i];
+    }
+
+    for(int i = 0; i < nums.size(); ++i){
+        output[i] = output[i] / sum;
+    }
+}
+
+void MySoftmax_2D_Opt1(const vector<float>& nums, int row, int col, vector<float>& output){
+    if(nums.empty() || col <= 0 || row <= 0 || col * row != nums.size()){
+        output.clear();
+        return;
+    }
+
+    if(output.size() != nums.size()){
+        output.resize(nums.size());
+    }
+    float row_sum;
+    float row_max;
+
+    for(int i = 0; i < row; ++i){
+        row_sum = 0.0;
+        row_max = *max_element(nums.begin() + i * col, nums.begin() + (i + 1) * col);
+
+        for(int j = 0; j < col; ++j){
+            output[i * col + j] = exp(nums[i * col + j] - row_max);
+            row_sum = row_sum + output[i * col + j];
+        }
+
+        for(int j = 0; j < col; ++j){
+            output[i * col + j] = output[i * col + j] / row_sum;
+        }
+    }
 }
