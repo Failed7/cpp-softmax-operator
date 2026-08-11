@@ -1,0 +1,111 @@
+Seed = 1786450954086296800
+
+========================================
+Input size = 1000
+========================================
+
+[1D Baseline]
+Median time = 0.0026 ms
+Throughput = 384.615 M elements/s
+Time per element = 2.6 ns
+Sum of the last output = 1
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 0.0025 ms
+Throughput = 400 M elements/s
+Time per element = 2.5 ns
+Sum of the last output = 1
+
+[1D Opt2 - Reciprocal Multiplication]
+Median time = 0.0024 ms
+Throughput = 416.667 M elements/s
+Time per element = 2.4 ns
+Sum of the last output = 1
+
+========================================
+Input size = 10000
+========================================
+
+[1D Baseline]
+Median time = 0.0244 ms
+Throughput = 409.836 M elements/s
+Time per element = 2.44 ns
+Sum of the last output = 1.00001
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 0.0248 ms
+Throughput = 403.226 M elements/s
+Time per element = 2.48 ns
+Sum of the last output = 1.00001
+
+[1D Opt2 - Reciprocal Multiplication]
+Median time = 0.0351 ms
+Throughput = 284.9 M elements/s
+Time per element = 3.51 ns
+Sum of the last output = 1.00001
+
+========================================
+Input size = 100000
+========================================
+
+[1D Baseline]
+Median time = 0.24525 ms
+Throughput = 407.747 M elements/s
+Time per element = 2.4525 ns
+Sum of the last output = 1.00008
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 0.25115 ms
+Throughput = 398.168 M elements/s
+Time per element = 2.5115 ns
+Sum of the last output = 1.00008
+
+[1D Opt2 - Reciprocal Multiplication]
+Median time = 0.2343 ms
+Throughput = 426.803 M elements/s
+Time per element = 2.343 ns
+Sum of the last output = 1.00008
+
+========================================
+Input size = 1000000
+========================================
+
+[1D Baseline]
+Median time = 3.40835 ms
+Throughput = 293.397 M elements/s
+Time per element = 3.40835 ns
+Sum of the last output = 1.00074
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 2.7323 ms
+Throughput = 365.992 M elements/s
+Time per element = 2.7323 ns
+Sum of the last output = 1.00074
+
+[1D Opt2 - Reciprocal Multiplication]
+Median time = 2.44045 ms
+Throughput = 409.76 M elements/s
+Time per element = 2.44045 ns
+Sum of the last output = 1.00074
+
+========================================
+Input size = 5000000
+========================================
+
+[1D Baseline]
+Median time = 18.4548 ms
+Throughput = 270.933 M elements/s
+Time per element = 3.69095 ns
+Sum of the last output = 1.00351
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 14.6478 ms
+Throughput = 341.349 M elements/s
+Time per element = 2.92955 ns
+Sum of the last output = 1.00351
+
+[1D Opt2 - Reciprocal Multiplication]
+Median time = 13.9995 ms
+Throughput = 357.154 M elements/s
+Time per element = 2.79991 ns
+Sum of the last output = 1.00351

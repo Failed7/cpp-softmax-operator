@@ -151,6 +151,77 @@ int run_2d_opt1_benchmark(size_t row, size_t col, const vector<float>& input){
     return 0;
 }
 
+int run_1d_opt2_benchmark(const vector<float>& input){
+    cout << "[1D Opt2 - Reciprocal Multiplication]" << endl;
+
+    vector<float> output(input.size());
+    for (int i = 0; i < 5; ++i){
+        MySoftmax_1D_Opt2(input, output);
+    }
+
+    vector<double> times;
+    for (int i = 0; i < 20; ++i){
+        auto start = chrono::steady_clock::now();
+        MySoftmax_1D_Opt2(input, output);
+        auto end = chrono::steady_clock::now();
+
+        double elapsed_ms = chrono::duration<double, milli>(end - start).count();
+        times.push_back(elapsed_ms);
+    }
+
+    sort(times.begin(), times.end());
+
+    double median_ms = (times[9] + times[10]) / 2.0;
+    cout << "Median time = " << median_ms << " ms" << endl;
+
+    double elements_per_second = output.size() / (median_ms / 1000.0);
+    cout << "Throughput = " << elements_per_second / 1e6 << " M elements/s" << endl;
+    
+    double ns_per_element = median_ms * 1e6 / output.size();
+    cout << "Time per element = " << ns_per_element << " ns" << endl;
+    
+    double sum = accumulate(output.begin(), output.end(), 0.0);
+    cout << "Sum of the last output = " << sum << endl << endl;
+
+    return 0;
+}
+
+int run_2d_opt2_benchmark(size_t row, size_t col, const vector<float>& input){
+    cout << "[2D Opt2 - Reciprocal Multiplication]" << endl;
+    
+    size_t size = row * col;
+    vector<float> output(size);
+    for (int i = 0; i < 5; ++i){
+        MySoftmax_2D_Opt2(input, row, col, output);
+    }
+
+    vector<double> times;
+    for (int i = 0; i < 20; ++i){
+        auto start = chrono::steady_clock::now();
+        MySoftmax_2D_Opt2(input, row, col, output);
+        auto end = chrono::steady_clock::now();
+
+        double elapsed_ms = chrono::duration<double, milli>(end - start).count();
+        times.push_back(elapsed_ms);
+    }
+
+    sort(times.begin(), times.end());
+
+    double median_ms = (times[9] + times[10]) / 2.0;
+    cout << "Median time = " << median_ms << " ms" << endl;
+
+    double elements_per_second = size / (median_ms / 1000.0);
+    cout << "Throughput = " << elements_per_second / 1e6 << " M elements/s" << endl;
+    
+    double ns_per_element = median_ms * 1e6 / size;
+    cout << "Time per element = " << ns_per_element << " ns" << endl;
+    
+    double sum = accumulate(output.begin(), output.end(), 0.0);
+    cout << "Sum of the last output = " << sum << " (expected about " << row << ")" << endl << endl;
+
+    return 0;
+}
+
 int main(){
     auto seed = chrono::high_resolution_clock::now().time_since_epoch().count();
     
@@ -173,6 +244,7 @@ int main(){
 
         run_1d_benchmark(input_1d);
         run_1d_opt1_benchmark(input_1d);
+        run_1d_opt2_benchmark(input_1d);
     }
 
     vector<pair<size_t, size_t>> shapes = {
@@ -200,6 +272,7 @@ int main(){
 
         run_2d_benchmark(row, col, input_2d);
         run_2d_opt1_benchmark(row, col, input_2d);
+        run_2d_opt2_benchmark(row, col, input_2d);
     }
 
     return 0;
