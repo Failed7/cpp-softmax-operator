@@ -6,6 +6,7 @@
 #include <random>
 #include <algorithm>
 #include <numeric>
+#include <omp.h>
 
 using namespace std;
 
@@ -222,6 +223,78 @@ int run_2d_opt2_benchmark(size_t row, size_t col, const vector<float>& input){
     return 0;
 }
 
+int run_2d_opt3_benchmark(size_t row, size_t col, const vector<float>& input){
+    cout << "[2D Opt3 - OpenMP Row-Level Parallelization]" << endl;
+    
+    size_t size = row * col;
+    vector<float> output(size);
+    for (int i = 0; i < 5; ++i){
+        MySoftmax_2D_Opt3(input, row, col, output);
+    }
+
+    vector<double> times;
+    for (int i = 0; i < 20; ++i){
+        auto start = chrono::steady_clock::now();
+        MySoftmax_2D_Opt3(input, row, col, output);
+        auto end = chrono::steady_clock::now();
+
+        double elapsed_ms = chrono::duration<double, milli>(end - start).count();
+        times.push_back(elapsed_ms);
+    }
+
+    sort(times.begin(), times.end());
+
+    double median_ms = (times[9] + times[10]) / 2.0;
+    cout << "Median time = " << median_ms << " ms (default threads = " << omp_get_max_threads() << ")" << endl;
+
+    double elements_per_second = size / (median_ms / 1000.0);
+    cout << "Throughput = " << elements_per_second / 1e6 << " M elements/s" << endl;
+    
+    double ns_per_element = median_ms * 1e6 / size;
+    cout << "Time per element = " << ns_per_element << " ns" << endl;
+    
+    double sum = accumulate(output.begin(), output.end(), 0.0);
+    cout << "Sum of the last output = " << sum << " (expected about " << row << ")" << endl << endl;
+
+    return 0;
+}
+
+int run_2d_opt3_extra_benchmark(size_t row, size_t col, const vector<float>& input){
+    cout << "[2D Opt3 Extra - Thread Scaling]" << endl;
+
+    int original_threads = omp_get_max_threads();
+    vector<float> output(row * col);
+
+    vector<int> thread_counts = {1, 2, 4, 8};
+
+    for(int num_threads : thread_counts){
+        omp_set_num_threads(num_threads);
+
+        for(int i = 0; i < 5; ++i){
+            MySoftmax_2D_Opt3(input, row, col, output);
+        }
+
+        vector<double> times;
+
+        for(int i = 0; i < 20; ++i){
+            auto start = chrono::steady_clock::now();
+            MySoftmax_2D_Opt3(input, row, col, output);
+            auto end = chrono::steady_clock::now();
+
+            double elapsed_ms = chrono::duration<double, milli > (end - start).count();
+            times.push_back(elapsed_ms);
+        }
+
+        sort(times.begin(), times.end());
+
+        double median_ms = (times[9] + times[10]) / 2.0;
+        cout << num_threads << " thread(s): " << median_ms << " ms" << endl;
+    }
+
+    omp_set_num_threads(original_threads);
+    return 0;
+}
+
 int main(){
     auto seed = chrono::high_resolution_clock::now().time_since_epoch().count();
     
@@ -273,6 +346,8 @@ int main(){
         run_2d_benchmark(row, col, input_2d);
         run_2d_opt1_benchmark(row, col, input_2d);
         run_2d_opt2_benchmark(row, col, input_2d);
+        run_2d_opt3_benchmark(row, col, input_2d);
+        run_2d_opt3_extra_benchmark(row, col, input_2d);
     }
 
     return 0;

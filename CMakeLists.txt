@@ -4,6 +4,7 @@ project(cpp_softmax_operator LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+find_package(OpenMP REQUIRED)
 
 add_executable(softmax_demo
     src/main.cpp
@@ -11,6 +12,7 @@ add_executable(softmax_demo
 )
 
 target_include_directories(softmax_demo PRIVATE include)
+target_link_libraries(softmax_demo PRIVATE OpenMP::OpenMP_CXX)
 
 add_executable(test_driver
     tests/test_driver.cpp
@@ -18,6 +20,7 @@ add_executable(test_driver
 )
 
 target_include_directories(test_driver PRIVATE include)
+target_link_libraries(test_driver PRIVATE OpenMP::OpenMP_CXX)
 
 add_executable(test_optimization
     tests/test_optimization.cpp
@@ -25,6 +28,7 @@ add_executable(test_optimization
 )
 
 target_include_directories(test_optimization PRIVATE include)
+target_link_libraries(test_optimization PRIVATE OpenMP::OpenMP_CXX)
 
 add_executable(softmax_benchmark
     benchmarks/benchmark_softmax.cpp
@@ -32,6 +36,7 @@ add_executable(softmax_benchmark
 )
 
 target_include_directories(softmax_benchmark PRIVATE include)
+target_link_libraries(softmax_benchmark PRIVATE OpenMP::OpenMP_CXX)
 
 enable_testing()
 find_package(Python3 REQUIRED COMPONENTS Interpreter)

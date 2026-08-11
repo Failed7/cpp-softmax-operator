@@ -56,16 +56,20 @@ int main(){
 
     vector<float> optimized1_2d(input.size());
     vector<float> optimized2_2d(input.size());
+    vector<float> optimized3_2d(input.size());
     
     MySoftmax_2D_Opt1(input, row, col, optimized1_2d);
     MySoftmax_2D_Opt2(input, row, col, optimized2_2d);
+    MySoftmax_2D_Opt3(input, row, col, optimized3_2d);
 
     max_error[0] = 0.0f;
     max_error[1] = 0.0f;
+    max_error[2] = 0.0f;
 
     for(int i = 0; i < input.size(); ++i){
         max_error[0] = max(max_error[0], abs(baseline_2d[i] - optimized1_2d[i]));
         max_error[1] = max(max_error[1], abs(baseline_2d[i] - optimized2_2d[i]));
+        max_error[2] = max(max_error[2], abs(baseline_2d[i] - optimized3_2d[i]));
     }
 
     cout << "2D Opt1 max_error = " << max_error[0] << endl;
@@ -76,9 +80,15 @@ int main(){
 
     cout << "2D Opt2 max_error = " << max_error[1] << endl;
     if(max_error[1] > 1e-5f){
-        return 1;
+        return 2;
     }
     cout << "2D Opt2 passed" << endl;
+
+    cout << "2D Opt3 max_error = " << max_error[2] << endl;
+    if(max_error[2] > 1e-5f){
+        return 3;
+    }
+    cout << "2D Opt3 passed" << endl;
 
     return 0;
 }

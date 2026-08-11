@@ -10,3 +10,5 @@ void MySoftmax_2D_Opt1(const std::vector<float>& nums, int row, int col, std::ve
 
 void MySoftmax_1D_Opt2(const std::vector<float>& nums, std::vector<float>& output);
 void MySoftmax_2D_Opt2(const std::vector<float>& nums, int row, int col, std::vector<float>& output);
+
+void MySoftmax_2D_Opt3(const std::vector<float>& nums, int row, int col, std::vector<float>& output);
