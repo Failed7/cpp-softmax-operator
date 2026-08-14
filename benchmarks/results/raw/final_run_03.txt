@@ -1,0 +1,277 @@
+﻿Seed = 20260814
+
+========================================
+Input size = 1000
+========================================
+
+[1D Baseline]
+Median time = 0.0025 ms
+Throughput = 400 M elements/s
+Time per element = 2.5 ns
+Sum of the last output = 1
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 0.0025 ms
+Throughput = 400 M elements/s
+Time per element = 2.5 ns
+Sum of the last output = 1
+
+[1D Opt2 - Reciprocal Multiplication]
+Median time = 0.0023 ms
+Throughput = 434.783 M elements/s
+Time per element = 2.3 ns
+Sum of the last output = 1
+
+========================================
+Input size = 10000
+========================================
+
+[1D Baseline]
+Median time = 0.02535 ms
+Throughput = 394.477 M elements/s
+Time per element = 2.535 ns
+Sum of the last output = 1.00001
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 0.025 ms
+Throughput = 400 M elements/s
+Time per element = 2.5 ns
+Sum of the last output = 1.00001
+
+[1D Opt2 - Reciprocal Multiplication]
+Median time = 0.0235 ms
+Throughput = 425.532 M elements/s
+Time per element = 2.35 ns
+Sum of the last output = 1.00001
+
+========================================
+Input size = 100000
+========================================
+
+[1D Baseline]
+Median time = 0.24845 ms
+Throughput = 402.495 M elements/s
+Time per element = 2.4845 ns
+Sum of the last output = 1.00007
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 0.24995 ms
+Throughput = 400.08 M elements/s
+Time per element = 2.4995 ns
+Sum of the last output = 1.00007
+
+[1D Opt2 - Reciprocal Multiplication]
+Median time = 0.2403 ms
+Throughput = 416.146 M elements/s
+Time per element = 2.403 ns
+Sum of the last output = 1.00007
+
+========================================
+Input size = 1000000
+========================================
+
+[1D Baseline]
+Median time = 3.46235 ms
+Throughput = 288.821 M elements/s
+Time per element = 3.46235 ns
+Sum of the last output = 1.00077
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 2.50495 ms
+Throughput = 399.21 M elements/s
+Time per element = 2.50495 ns
+Sum of the last output = 1.00077
+
+[1D Opt2 - Reciprocal Multiplication]
+Median time = 2.424 ms
+Throughput = 412.541 M elements/s
+Time per element = 2.424 ns
+Sum of the last output = 1.00077
+
+========================================
+Input size = 5000000
+========================================
+
+[1D Baseline]
+Median time = 20.7862 ms
+Throughput = 240.544 M elements/s
+Time per element = 4.15724 ns
+Sum of the last output = 1.00353
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 14.924 ms
+Throughput = 335.032 M elements/s
+Time per element = 2.98479 ns
+Sum of the last output = 1.00353
+
+[1D Opt2 - Reciprocal Multiplication]
+Median time = 14.5668 ms
+Throughput = 343.246 M elements/s
+Time per element = 2.91336 ns
+Sum of the last output = 1.00353
+
+========================================
+Input size = 10 * 100
+========================================
+
+[2D Baseline]
+Median time = 0.0027 ms
+Throughput = 370.37 M elements/s
+Time per element = 2.7 ns
+Sum of the last output = 10 (expected about 10)
+
+[2D Opt1 - Output Buffer Reuse]
+Median time = 0.00255 ms
+Throughput = 392.157 M elements/s
+Time per element = 2.55 ns
+Sum of the last output = 10 (expected about 10)
+
+[2D Opt2 - Reciprocal Multiplication]
+Median time = 0.0025 ms
+Throughput = 400 M elements/s
+Time per element = 2.5 ns
+Sum of the last output = 10 (expected about 10)
+
+[2D Opt3 - OpenMP Row-Level Parallelization]
+Median time = 0.07725 ms (default threads = 16)
+Throughput = 12.945 M elements/s
+Time per element = 77.25 ns
+Sum of the last output = 10 (expected about 10)
+
+[2D Opt3 Extra - Thread Scaling]
+1 thread(s): 0.0089 ms
+2 thread(s): 0.02045 ms
+4 thread(s): 0.03 ms
+8 thread(s): 0.05045 ms
+========================================
+Input size = 100 * 100
+========================================
+
+[2D Baseline]
+Median time = 0.04715 ms
+Throughput = 212.089 M elements/s
+Time per element = 4.715 ns
+Sum of the last output = 100 (expected about 100)
+
+[2D Opt1 - Output Buffer Reuse]
+Median time = 0.0255 ms
+Throughput = 392.157 M elements/s
+Time per element = 2.55 ns
+Sum of the last output = 100 (expected about 100)
+
+[2D Opt2 - Reciprocal Multiplication]
+Median time = 0.0246 ms
+Throughput = 406.504 M elements/s
+Time per element = 2.46 ns
+Sum of the last output = 100 (expected about 100)
+
+[2D Opt3 - OpenMP Row-Level Parallelization]
+Median time = 0.07335 ms (default threads = 16)
+Throughput = 136.333 M elements/s
+Time per element = 7.335 ns
+Sum of the last output = 100 (expected about 100)
+
+[2D Opt3 Extra - Thread Scaling]
+1 thread(s): 0.0456 ms
+2 thread(s): 0.04505 ms
+4 thread(s): 0.0396 ms
+8 thread(s): 0.06205 ms
+========================================
+Input size = 100 * 1000
+========================================
+
+[2D Baseline]
+Median time = 0.2617 ms
+Throughput = 382.117 M elements/s
+Time per element = 2.617 ns
+Sum of the last output = 100 (expected about 100)
+
+[2D Opt1 - Output Buffer Reuse]
+Median time = 0.2504 ms
+Throughput = 399.361 M elements/s
+Time per element = 2.504 ns
+Sum of the last output = 100 (expected about 100)
+
+[2D Opt2 - Reciprocal Multiplication]
+Median time = 0.2462 ms
+Throughput = 406.174 M elements/s
+Time per element = 2.462 ns
+Sum of the last output = 100 (expected about 100)
+
+[2D Opt3 - OpenMP Row-Level Parallelization]
+Median time = 0.1106 ms (default threads = 16)
+Throughput = 904.159 M elements/s
+Time per element = 1.106 ns
+Sum of the last output = 100 (expected about 100)
+
+[2D Opt3 Extra - Thread Scaling]
+1 thread(s): 0.2439 ms
+2 thread(s): 0.15725 ms
+4 thread(s): 0.09955 ms
+8 thread(s): 0.12235 ms
+========================================
+Input size = 1000 * 1000
+========================================
+
+[2D Baseline]
+Median time = 3.90815 ms
+Throughput = 255.876 M elements/s
+Time per element = 3.90815 ns
+Sum of the last output = 1000 (expected about 1000)
+
+[2D Opt1 - Output Buffer Reuse]
+Median time = 2.6752 ms
+Throughput = 373.804 M elements/s
+Time per element = 2.6752 ns
+Sum of the last output = 1000 (expected about 1000)
+
+[2D Opt2 - Reciprocal Multiplication]
+Median time = 2.52345 ms
+Throughput = 396.283 M elements/s
+Time per element = 2.52345 ns
+Sum of the last output = 1000 (expected about 1000)
+
+[2D Opt3 - OpenMP Row-Level Parallelization]
+Median time = 0.38135 ms (default threads = 16)
+Throughput = 2622.26 M elements/s
+Time per element = 0.38135 ns
+Sum of the last output = 1000 (expected about 1000)
+
+[2D Opt3 Extra - Thread Scaling]
+1 thread(s): 2.4356 ms
+2 thread(s): 1.2442 ms
+4 thread(s): 0.71485 ms
+8 thread(s): 0.53075 ms
+========================================
+Input size = 1000 * 5000
+========================================
+
+[2D Baseline]
+Median time = 20.1392 ms
+Throughput = 248.271 M elements/s
+Time per element = 4.02785 ns
+Sum of the last output = 1000 (expected about 1000)
+
+[2D Opt1 - Output Buffer Reuse]
+Median time = 13.4068 ms
+Throughput = 372.944 M elements/s
+Time per element = 2.68137 ns
+Sum of the last output = 1000 (expected about 1000)
+
+[2D Opt2 - Reciprocal Multiplication]
+Median time = 18.0341 ms
+Throughput = 277.253 M elements/s
+Time per element = 3.60682 ns
+Sum of the last output = 1000 (expected about 1000)
+
+[2D Opt3 - OpenMP Row-Level Parallelization]
+Median time = 3.43265 ms (default threads = 16)
+Throughput = 1456.6 M elements/s
+Time per element = 0.68653 ns
+Sum of the last output = 1000 (expected about 1000)
+
+[2D Opt3 Extra - Thread Scaling]
+1 thread(s): 17.2902 ms
+2 thread(s): 15.9146 ms
+4 thread(s): 8.15855 ms
+8 thread(s): 4.33765 ms

@@ -296,8 +296,7 @@ int run_2d_opt3_extra_benchmark(size_t row, size_t col, const vector<float>& inp
 }
 
 int main(){
-    auto seed = chrono::high_resolution_clock::now().time_since_epoch().count();
-    
+    const mt19937::result_type seed = 20260814u;
     mt19937 rng(seed);
 
     cout << "Seed = " << seed << endl << endl;

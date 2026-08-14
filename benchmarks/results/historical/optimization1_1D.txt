@@ -1,0 +1,81 @@
+Seed = 1786346227811260900
+
+========================================
+Input size = 1000
+========================================
+
+[1D Baseline]
+Median time = 0.0026 ms
+Throughput = 384.615 M elements/s
+Time per element = 2.6 ns
+Sum of the last output = 1
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 0.0038 ms
+Throughput = 263.158 M elements/s
+Time per element = 3.8 ns
+Sum of the last output = 1
+
+========================================
+Input size = 10000
+========================================
+
+[1D Baseline]
+Median time = 0.0245 ms
+Throughput = 408.163 M elements/s
+Time per element = 2.45 ns
+Sum of the last output = 1.00001
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 0.0255 ms
+Throughput = 392.157 M elements/s
+Time per element = 2.55 ns
+Sum of the last output = 1.00001
+
+========================================
+Input size = 100000
+========================================
+
+[1D Baseline]
+Median time = 0.26285 ms
+Throughput = 380.445 M elements/s
+Time per element = 2.6285 ns
+Sum of the last output = 1.00007
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 0.25505 ms
+Throughput = 392.08 M elements/s
+Time per element = 2.5505 ns
+Sum of the last output = 1.00007
+
+========================================
+Input size = 1000000
+========================================
+
+[1D Baseline]
+Median time = 3.44365 ms
+Throughput = 290.39 M elements/s
+Time per element = 3.44365 ns
+Sum of the last output = 1.00077
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 2.6423 ms
+Throughput = 378.458 M elements/s
+Time per element = 2.6423 ns
+Sum of the last output = 1.00077
+
+========================================
+Input size = 5000000
+========================================
+
+[1D Baseline]
+Median time = 18.8662 ms
+Throughput = 265.024 M elements/s
+Time per element = 3.77324 ns
+Sum of the last output = 1.00354
+
+[1D Opt1 - Output Buffer Reuse]
+Median time = 14.7239 ms
+Throughput = 339.583 M elements/s
+Time per element = 2.94479 ns
+Sum of the last output = 1.00354

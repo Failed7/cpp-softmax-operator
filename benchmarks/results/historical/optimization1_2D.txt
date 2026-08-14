@@ -1,0 +1,81 @@
+Seed = 1786346227811260900
+
+========================================
+Input size = 10 * 100
+========================================
+
+[2D Baseline]
+Median time = 0.0028 ms
+Throughput = 357.143 M elements/s
+Time per element = 2.8 ns
+Sum of the last output = 10 (expected about 10)
+
+[2D Opt1 - Output Buffer Reuse]
+Median time = 0.0026 ms
+Throughput = 384.615 M elements/s
+Time per element = 2.6 ns
+Sum of the last output = 10 (expected about 10)
+
+========================================
+Input size = 100 * 100
+========================================
+
+[2D Baseline]
+Median time = 0.0433 ms
+Throughput = 230.947 M elements/s
+Time per element = 4.33 ns
+Sum of the last output = 100 (expected about 100)
+
+[2D Opt1 - Output Buffer Reuse]
+Median time = 0.026 ms
+Throughput = 384.615 M elements/s
+Time per element = 2.6 ns
+Sum of the last output = 100 (expected about 100)
+
+========================================
+Input size = 100 * 1000
+========================================
+
+[2D Baseline]
+Median time = 0.26105 ms
+Throughput = 383.068 M elements/s
+Time per element = 2.6105 ns
+Sum of the last output = 100 (expected about 100)
+
+[2D Opt1 - Output Buffer Reuse]
+Median time = 0.26175 ms
+Throughput = 382.044 M elements/s
+Time per element = 2.6175 ns
+Sum of the last output = 100 (expected about 100)
+
+========================================
+Input size = 1000 * 1000
+========================================
+
+[2D Baseline]
+Median time = 3.5219 ms
+Throughput = 283.938 M elements/s
+Time per element = 3.5219 ns
+Sum of the last output = 1000 (expected about 1000)
+
+[2D Opt1 - Output Buffer Reuse]
+Median time = 2.6277 ms
+Throughput = 380.561 M elements/s
+Time per element = 2.6277 ns
+Sum of the last output = 1000 (expected about 1000)
+
+========================================
+Input size = 1000 * 5000
+========================================
+
+[2D Baseline]
+Median time = 17.7341 ms
+Throughput = 281.942 M elements/s
+Time per element = 3.54683 ns
+Sum of the last output = 1000 (expected about 1000)
+
+[2D Opt1 - Output Buffer Reuse]
+Median time = 13.7564 ms
+Throughput = 363.466 M elements/s
+Time per element = 2.75129 ns
+Sum of the last output = 1000 (expected about 1000)
